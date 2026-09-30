@@ -1,0 +1,88 @@
+{
+  "name": "dsh-auto-review-jev",
+  "version": "0.2.0-jev.0",
+  "description": "DeepSeek Harness 审批守护者：权限请求先由审查模型裁决。支持 System One 决策 API 后端（TypeSafe Jev / 硅基流动 systemone / 自部署 Laya）、onLowConfidence 低置信度策略与 allowRules 免审白名单。fork 自 @gbthui/dsh-auto-review。",
+  "keywords": [
+    "deepseek",
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "plugin",
+    "agent",
+    "approval",
+    "auto-review",
+    "security",
+    "guardian",
+    "systemone",
+    "typesafe",
+    "jev",
+    "siliconflow",
+    "laya"
+  ],
+  "homepage": "https://github.com/xlennart/dsh-auto-review-jev#readme",
+  "bugs": {
+    "url": "https://github.com/xlennart/dsh-auto-review-jev/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xlennart/dsh-auto-review-jev.git"
+  },
+  "license": "Apache-2.0",
+  "author": "xlennart",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "src",
+    "docs",
+    "test",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "README_EN.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "engines": {
+    "node": ">=22",
+    "dsh": ">=0.2.0-0 <0.3.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-plugin-manager"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "typescript": "^7.0.2"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit",
+    "test": "node test/smoke/lib-smoke.mjs && node test/smoke/answerer-smoke.mjs && node test/smoke/inject-source-smoke.mjs && node test/smoke/trace-smoke.mjs && node test/smoke/client-smoke.mjs",
+    "test:systemone": "node --test test/systemone.test.ts",
+    "prepack": "tsc -p tsconfig.build.json"
+  }
+}

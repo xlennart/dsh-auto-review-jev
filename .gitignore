@@ -1,0 +1,21 @@
+# Dependencies and build output of local experiments
+node_modules/
+coverage/
+*.tsbuildinfo
+
+# Local runtime artifacts: never commit reviewer traces, audits or tarballs
+*.tgz
+*.log
+*.jsonl
+*.env
+.dsh-memory/
+.build/
+
+# Smoke-suite reports (generated next to the scripts)
+test/**/*.txt
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
